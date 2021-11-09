@@ -95,8 +95,16 @@ def list_tuples(n, k=3, low=5, high=15):
     return tup_list
 
 
+# #### Canvas Comment -  Q1: -2 for not checking it is a list
+# This is being corrected in the cell below.
+
+# +
 for i in list_tuples(4):
     assert isinstance(i, tuple)
+
+# Correction made
+assert isinstance(list_tuples(4), list)
+# -
 
 # # Question 2 - Refactor the Snippet
 
