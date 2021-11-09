@@ -11,9 +11,11 @@ The notebook is designed to read, clean and combine various data files from the 
 
 **It specifically combines the Demographics and the Dentition Dataset**
 
-1. It slices the dataset to include only the required columns which are: `id`, `age`, `race` and `ethnicity`, `education`, `marital status` along with survey weighting columns from the demographic dataset. 
+1. It slices the dataset to include only the required columns which are: `id`, `age`, `gender`, `race` and `ethnicity`, `education`, `marital status` along with survey weighting columns from the demographic dataset. 
 2. It slices the dentiton dataset to include : `dentition status`, `tooth counts` and `cavity counts`.
 
+"Changes: Now, we added `gender` to the columns of the combined dataset.**  
+  
 This whole process is done to prepare the dataset for further analysis and applying visulations on the data. Another goal is to apply various models on the dataset as well.
 
 The link for the above script is : [PS2 Q3](/Users/anuraagramesh/Documents/Python-Codes/Stats-507/Github-Stats507/Stats507/PS2-Question-3.ipynb)
