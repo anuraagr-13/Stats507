@@ -161,8 +161,6 @@ df.replace(np.nan, 75)
 # Added RIAGENDR column from Nhanes Demo Dataset
 nhanes_data1 = pd.read_parquet('Nhanes Data.parquet')
 
-nhanes_data1
-
 oral_data1 = pd.read_parquet('Oral Data.parquet')
 
 
@@ -203,11 +201,9 @@ def edu(val, age):
     -------
     string
     Whether has or does not have college experience
-    """
+    """ 
     if(val == 'college' or val == 'college graduate'):
         return 'some college/college graduate'
-    elif(age < 20):
-        return 'No college/<20'
     else:
         return 'No college/<20'
 
@@ -218,7 +214,7 @@ nhanes_rev = nhanes_rev.loc[:,['SEQN', 'gender', 'age',
                               'education_level', 'interview_status']]
 nhanes_rev['under_20'] = nhanes_rev['age'].apply(under_20)
 nhanes_rev['college'] = nhanes_rev.apply(lambda x: edu(x['education_level']
-                                                     , x['age']), axis=1)
+                                                     , x['age']), axis = 1)
 # Joining both the datasets
 nhanes_temp = nhanes_rev.join(oral_data1, on = ['SEQN'], how = 'left')
 nhanes_rev['ohx_status'] = nhanes_temp['dentition_status']
@@ -279,6 +275,12 @@ print('Number of rows remaining: ' + str(len(nhanes_rev1)))
 
 # ### d.
 
+# **Canvas Comments**
+# 1. Q1 (d) -1 for too many decimals
+# 2. Q1 (d) -4 for wrong numbers in the college part
+#
+# **Corrections are being made for both 1 and 2**
+
 nhanes_rev_group = (nhanes_rev1
                .groupby(by = ['under_20','ohx'])
                .size())
@@ -297,8 +299,8 @@ nhanes_rev_group4 = (nhanes_rev1
 
 nhanes_rev_group3 = pd.DataFrame(nhanes_rev_group3)
 nhanes_rev_group4 = pd.DataFrame(nhanes_rev_group4)
-nhanes_rev_age = (round(nhanes_rev_group3['age'], 2).astype(str) + 
-                     ' (' + round(nhanes_rev_group4['age'], 2).astype(str) + 
+nhanes_rev_age = (round(nhanes_rev_group3['age'], 1).astype(str) + 
+                     ' (' + round(nhanes_rev_group4['age'], 1).astype(str) + 
                      ')')
 #Transpose the age-table
 nhanes_rev_age = pd.DataFrame(nhanes_rev_age)
@@ -325,10 +327,11 @@ def combine(df):
                                                df['missing']) * 100)
     df['percent_missing'] = (df['missing']/ (df['complete'] + 
                                              df['missing']) * 100)
+    #Correction made for (1)
     df1['complete'] = (df['complete'].astype(str) + ' (' +
-                      round(df['percent_complete'], 3).astype(str) +'%)')
+                      round(df['percent_complete'], 1).astype(str) +'%)')
     df1['missing'] = (df['missing'].astype(str) + ' (' +
-                      round(df['percent_missing'], 3).astype(str) +'%)')
+                      round(df['percent_missing'], 1).astype(str) +'%)')
     return df1
 
 
